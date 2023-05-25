@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CATWAR</title>
+    <script src="./js/catWar.js"></script>
+</head>
+<body> 
+             <!--la roca le gana al rayo, el rayo al agua, el agua a la roca-->
+    <!-- // juego de gatos: gato-roca: catrock, gato-rayo: lightningcat, gato-agua: gatoola -->
+    <h1> CATWAR😸 🪨 ⚡ 🌊 </h1>
+    <section id="selecciona-avatar">
+        <h2>Elige tu avatar</h2>
+
+        <label for="catrock">catrock</label>
+        <input type="radio" name="avatar" id="catrock" />
+        
+        <label for="lightningcat">Lightningcat</label>
+        <input type="radio" name="avatar" id="lightningcat" />
+        
+        <label for="gatoola">Gatoola</label>
+        <input type="radio" name="avatar" id="gatoola" />
+
+        
+
+        <button id="seleccionar-avatar">Seleccionar</button>
+    </section>
+    <section id="selecciona-elemento">
+        <h2>Elige tu elemento</h2>
+        <p>
+            "tu gato tiene<span>3</span> vidas"
+        </p>
+        <p>
+            "El gato enemigo tiene <span>3</span> vidas"
+        </p>
+        <p>
+            <button id="seleccionar-roca">Roca 🪨</button>
+            <button id="seleccionar-rayo">Rayo ⚡</button>
+            <button id="seleccionar-agua">Agua 🌊</button>
+        </p>
+        </section>
+        <section id="mensajes">
+            <p> 
+                "Tu gato ataco con ROCA, el gato enemigo ataco con RAYO - GANASTE "
+            </p>
+        </section>
+        <section id="reiniciar">
+            <button id="seleccionar-reiniciar">Reiniciar</button>
+        </section>
+
+    
+</body>
+</html>
