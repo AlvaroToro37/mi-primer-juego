@@ -70,17 +70,36 @@ function ataqueAleatorioEnemigo(){
       } else {
          ataqueEnemigo = 'AGUA'
       } 
-      crearMensaje()
+      combate()
    }
 
-function crearMensaje(){
+function crearMensaje(resultado) {
 
    let sectionMensaje = document.getElementById('mensajes')
    let parrafo = document.createElement('p')
-   parrafo.innerHTML = 'Tu atacaste con ' + ataqueJugador + ' el enemigo ataco con ' +  ataqueEnemigo 
+   parrafo.innerHTML = 'Tu atacaste con ' + ataqueJugador + ' el enemigo ataco con ' +  ataqueEnemigo + ' ' + resultado
    sectionMensaje.appendChild(parrafo) 
+}
 
-} 
+function combate(){ 
+// 1 para roca, 2 para rayo, 3 para agua
+   if(ataqueEnemigo == ataqueJugador) {
+      crearMensaje("EMPATE")
+   } else if(ataqueJugador == 'ROCA' && ataqueEnemigo == 'RAYO'){
+      crearMensaje("GANASTE")
+   } else if(ataqueJugador == 'RAYO' && ataqueEnemigo == 'AGUA'){
+      crearMensaje("GANASTE")
+   } else if(ataqueJugador == 'AGUA' && ataqueEnemigo == 'ROCA') {
+      crearMensaje("GANASTE")       
+   } else {
+      crearMensaje("PERDISTE")
+      
+   }
+}
+
+ 
+   
+
 
 function aleatorio(min, max) {
    return Math.floor(Math.random() * (max - min + 1) + min)
