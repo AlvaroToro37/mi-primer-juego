@@ -1,5 +1,7 @@
 let ataqueJugador
 let ataqueEnemigo
+let vidasJugador = 3
+let vidasEnemigo = 3
 
 function iniciarJuego() {
    let botonAvatarJugador = document.getElementById('seleccionar-avatar')
@@ -73,35 +75,72 @@ function ataqueAleatorioEnemigo(){
       combate()
    }
 
-function crearMensaje(resultado) {
+ function crearMensaje(resultado) {
 
-   let sectionMensaje = document.getElementById('mensajes')
-   let parrafo = document.createElement('p')
-   parrafo.innerHTML = 'Tu atacaste con ' + ataqueJugador + ' el enemigo ataco con ' +  ataqueEnemigo + ' ' + resultado
-   sectionMensaje.appendChild(parrafo) 
+      let sectionMensaje = document.getElementById('mensajes')
+      let parrafo = document.createElement('p')
+      parrafo.innerHTML = 'Tu atacaste con ' + ataqueJugador + ' el enemigo ataco con ' +  ataqueEnemigo + ' ' + resultado
+      sectionMensaje.appendChild(parrafo) 
 }
+   
+
 
 function combate(){ 
-// 1 para roca, 2 para rayo, 3 para agua
+   let spanVidasJugador = document.getElementById('vidas-jugador')
+   let spanVidasEnemigo = document.getElementById('vidas-enemigo')
+
    if(ataqueEnemigo == ataqueJugador) {
       crearMensaje("EMPATE")
-   } else if(ataqueJugador == 'ROCA' && ataqueEnemigo == 'RAYO'){
+  } else if(ataqueJugador == 'ROCA' && ataqueEnemigo == 'RAYO') {
       crearMensaje("GANASTE")
-   } else if(ataqueJugador == 'RAYO' && ataqueEnemigo == 'AGUA'){
+      vidasEnemigo--
+      spanVidasEnemigo.innerHTML = vidasEnemigo
+   
+  } else if(ataqueJugador == 'RAYO' && ataqueEnemigo == 'AGUA') {
       crearMensaje("GANASTE")
-   } else if(ataqueJugador == 'AGUA' && ataqueEnemigo == 'ROCA') {
-      crearMensaje("GANASTE")       
-   } else {
+      vidasEnemigo--
+      spanVidasEnemigo.innerHTML = vidasEnemigo
+   
+  } else if(ataqueJugador == 'AGUA' && ataqueEnemigo == 'ROCA') {
+      crearMensaje("GANASTE")
+      vidasEnemigo--
+      spanVidasEnemigo.innerHTML = vidasEnemigo
+     } else {
       crearMensaje("PERDISTE")
-      
-   }
+      vidasJugador--
+      spanVidasJugador.innerHTML = vidasJugador
+  }  
+  
+      revisarVidas()
 }
 
- 
-   
+function revisarVidas(){
+   if(vidasEnemigo == 0){
+      crearMensajeFinal("FELICIDADES, Ganaste")
+   } else if(vidasJugador == 0){
+      crearMensajeFinal("LO SIENTO, Perdiste")
+   }  
+
+}
+
+
+function crearMensajeFinal(resultadoFinal) {
+   let sectionMensajes = document.getElementById('mensajes')
+    
+   let parrafo = document.createElement('p')
+   parrafo.innerHTML = resultadoFinal
+
+   sectionMensajes.appendChild(parrafo)
+}
+
+
+
+
+
 
 
 function aleatorio(min, max) {
    return Math.floor(Math.random() * (max - min + 1) + min)
 }
 window.addEventListener('load', iniciarJuego)
+
