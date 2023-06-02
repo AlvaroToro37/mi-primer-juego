@@ -3,7 +3,14 @@ let ataqueEnemigo
 let vidasJugador = 3
 let vidasEnemigo = 3
 
-function iniciarJuego() {
+function iniciarJuego() { 
+
+   let sectionReiniciar = document.getElementById("reiniciar")
+   sectionReiniciar.style.display = "none"
+
+   let sectionSeleccionarElemento = document.getElementById("selecciona-elemento")
+   sectionSeleccionarElemento.style.display = "none"
+
    let botonAvatarJugador = document.getElementById('seleccionar-avatar')
    botonAvatarJugador.addEventListener('click', seleccionarAvatarJugador)
 
@@ -15,9 +22,17 @@ function iniciarJuego() {
    let botonAgua = document.getElementById('seleccionar-agua')
    botonAgua.addEventListener('click', ataqueAgua)
 
+   let botonReiniciar = document.getElementById('boton-reiniciar')
+   botonReiniciar.addEventListener('click', reiniciarJuego)
+
 }
 
 function seleccionarAvatarJugador() {
+   let sectionSeleccionarElemento = document.getElementById("selecciona-elemento")
+   sectionSeleccionarElemento.style.display = "block"
+   let sectionSeleccionarAvatar = document.getElementById("selecciona-avatar")
+   sectionSeleccionarAvatar.style.display = "none"
+
    let inputCatrock = document.getElementById('Catrock')
    let inputLightningcat = document.getElementById('Lightningcat')
    let inputCatoola = document.getElementById('Catoola')
@@ -119,25 +134,35 @@ function revisarVidas(){
       crearMensajeFinal("FELICIDADES, Ganaste")
    } else if(vidasJugador == 0){
       crearMensajeFinal("LO SIENTO, Perdiste")
-   }  
-
+   }
+   
 }
 
 
 function crearMensajeFinal(resultadoFinal) {
+
+   let sectionReiniciar = document.getElementById("reiniciar")
+   sectionReiniciar.style.display = "block"
+
    let sectionMensajes = document.getElementById('mensajes')
     
    let parrafo = document.createElement('p')
    parrafo.innerHTML = resultadoFinal
 
    sectionMensajes.appendChild(parrafo)
+
+   let botonRoca = document.getElementById('seleccionar-roca')
+   botonRoca.disabled = true
+   let botonRayo = document.getElementById('seleccionar-rayo')
+   botonRayo.disabled = true
+   let botonAgua = document.getElementById('seleccionar-agua')
+   botonAgua.disabled = true
+
 }
 
-
-
-
-
-
+function reiniciarJuego(){
+   location.reload() 
+}
 
 function aleatorio(min, max) {
    return Math.floor(Math.random() * (max - min + 1) + min)
