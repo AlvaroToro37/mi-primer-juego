@@ -1,0 +1,12 @@
+.titulo{
+    color: blue;
+    width: 310px;
+    height: 80px;
+    background-color: aqua;
+}
+#selecciona-avatar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
