@@ -1,12 +1,61 @@
-.titulo{
-    color: blue;
-    width: 310px;
-    height: 80px;
-    background-color: aqua;
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body{
+    font-family: 'Press Start 2P', cursive;
+    background-color: rgb(56, 109, 223);
 }
 #selecciona-avatar{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.titulo{
+    font-size: 50px;
+    color: #fdfdfdeb;
+           
+}
+
+.subtitulo{
+    color: #fdfdfdeb;
+    width: 200px;
+    height: 100px;
+    line-height: 70px;
+}
+
+.tarjetas{
+    display: flex;
+}
+.tarjeta-de-catwar{
+    
+    width: 420px;
+    height: 200px;
+    background: aqua;
+    padding: 18px;
+    box-sizing: border-box;
+    margin: 22px;
+    border: 1px solid hotpink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+.tarjeta-de-catwar img{
+    width: 114px;
+    height: 120px;
+}
+
+input{
+    display: none
+}
+
+#seleccionar-avatar{
+    width: 150px;
+    height: 24px;
+    color: aliceblue;
+    border: #cb0e0ef7;
+    background-color: rgb(100, 98, 243);
+    border-radius: 20px
+    
 }
