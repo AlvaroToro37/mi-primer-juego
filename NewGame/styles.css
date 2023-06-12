@@ -2,7 +2,7 @@
 
 body{
     font-family: 'Press Start 2P', cursive;
-    background-color: rgb(56, 109, 223);
+    background-color: rgb(0, 53, 167);
 }
 #selecciona-avatar{
     display: flex;
@@ -14,6 +14,8 @@ body{
 .titulo{
     font-size: 50px;
     color: #fdfdfdeb;
+    font-family: 'Press Start 2P', cursive;
+
            
 }
 
@@ -35,7 +37,7 @@ body{
     padding: 18px;
     box-sizing: border-box;
     margin: 22px;
-    border: 1px solid hotpink;
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,16 +48,55 @@ body{
     height: 120px;
 }
 
-input{
-    display: none
-}
+
 
 #seleccionar-avatar{
-    width: 150px;
-    height: 24px;
-    color: aliceblue;
-    border: #cb0e0ef7;
+    width: 190px;
+    height: 60px;
+    color: rgb(14 226 200);
     background-color: rgb(100, 98, 243);
     border-radius: 20px
     
 }
+
+input{
+    display: none
+}
+
+#selecciona-elemento{
+display: flex;
+display: flex;
+flex-direction: column;
+align-items: center;
+
+}
+
+.boton-de-ataque{
+    background-color: cyan;
+    padding: 18px;
+    box-sizing: border-box;
+    margin: 10px;
+    border-radius: 20px;
+    border-color: transparent;
+    width: 100px;
+    font-family: 'Press Start 2P', cursive;
+   
+}
+
+#mensajes{
+    width: 180px;
+    background: #e9e1e1ed;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 40px;
+    display: flex;
+    align-items:center; 
+    flex-direction: column;
+    
+}
+#boton-reiniciar{
+    border: none;
+    color:blue;
+    font-family: 'Press Start 2P', cursive;
+}
+

@@ -29,7 +29,7 @@ function iniciarJuego() {
 
 function seleccionarAvatarJugador() {
    let sectionSeleccionarElemento = document.getElementById("selecciona-elemento")
-   sectionSeleccionarElemento.style.display = "block"
+   sectionSeleccionarElemento.style.display = "flex"
    let sectionSeleccionarAvatar = document.getElementById("selecciona-avatar")
    sectionSeleccionarAvatar.style.display = "none"
 
@@ -54,7 +54,7 @@ function seleccionarAvatarJugador() {
 
 function seleccionarAvatarEnemigo() {
    let avatarAleatorio = aleatorio(1, 3)
-   let spanAvatarEnemigo = document.getElementById('Avatar-Enemigo')
+   let spanAvatarEnemigo = document.getElementById('avatar-enemigo')
 
    if (avatarAleatorio == 1) {
       spanAvatarEnemigo.innerHTML = 'Catrock'
@@ -79,7 +79,9 @@ function ataqueAgua() {
 }
 
 function ataqueAleatorioEnemigo(){
+   
    let ataqueAleatorio = aleatorio(1,3)
+   
    if(ataqueAleatorio == 1){
       ataqueEnemigo = 'ROCA'
    }else if(ataqueAleatorio == 2){
@@ -92,10 +94,21 @@ function ataqueAleatorioEnemigo(){
 
  function crearMensaje(resultado) {
 
-      let sectionMensaje = document.getElementById('mensajes')
-      let parrafo = document.createElement('p')
-      parrafo.innerHTML = 'Tu atacaste con ' + ataqueJugador + ' el enemigo ataco con ' +  ataqueEnemigo + ' ' + resultado
-      sectionMensaje.appendChild(parrafo) 
+  
+   let sectionMensajes = document.getElementById('resultado')
+      let ataqueDelJugardor = document.getElementById('ataque-del-jugardor')
+      let ataqueDelEnemigo = document.getElementById('ataque-del-enemigo')
+   
+
+      let nuevoAtaqueJugador = document.createElement('p')
+      let nuevoAtaqueEnemigo = document.createElement('p') 
+      
+      sectionMensajes.innerHTML = resultado
+      nuevoAtaqueJugador.innerHTML = ataqueJugador
+      nuevoAtaqueEnemigo.innerHTML = ataqueEnemigo
+      ataqueDelJugardor.appendChild(nuevoAtaqueJugador)
+      ataqueDelEnemigo.appendChild(nuevoAtaqueEnemigo)
+
 }
    
 
@@ -144,12 +157,10 @@ function crearMensajeFinal(resultadoFinal) {
    let sectionReiniciar = document.getElementById("reiniciar")
    sectionReiniciar.style.display = "block"
 
-   let sectionMensajes = document.getElementById('mensajes')
+   let sectionMensajes = document.getElementById('resultado')
     
-   let parrafo = document.createElement('p')
-   parrafo.innerHTML = resultadoFinal
+   sectionMensajes.innerHTML = resultadoFinal
 
-   sectionMensajes.appendChild(parrafo)
 
    let botonRoca = document.getElementById('seleccionar-roca')
    botonRoca.disabled = true

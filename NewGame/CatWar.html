@@ -8,55 +8,64 @@
     <script src="./js/catWar.js"></script>
     <link rel="stylesheet" href="./styles.css">
 </head>
-<body> 
+    <body> 
              <!--la roca le gana al rayo, el rayo al agua, el agua a la roca-->
     <!-- // juego de gatos: gato-roca: catrock, gato-rayo: lightningcat, gato-agua: Catoola -->
 
     <section id="selecciona-avatar">
 
-        <h class="titulo"> CATWAR 😸 </h>
+        <h1 class="titulo"> CATWAR 😸 </h1>
 
         <h2 class="subtitulo">Elige tu avatar</h2>
 
         <div class="tarjetas">
 
-            <label class="tarjeta-de-catwar" for="Catrock"><p>Catrock</p><img src="./imagen/rock.png" alt="Catrock"> </label>
+            <label class="tarjeta-de-catwar" for="Catrock"><p>Catrock</p>
+                <img src="./imagen/rock.png" alt="Catrock"> </label>
             <input type="radio" name="avatar" id="Catrock" />
             
-            <label class="tarjeta-de-catwar" for="Lightningcat"> <p>Lightningcat</p> <img src="./imagen/light.png" alt="Lightningcat"> </label>
+            <label class="tarjeta-de-catwar" for="Lightningcat"> <p>Lightningcat</p> 
+                <img src="./imagen/light.png" alt="Lightningcat"> </label>
              
             <input type="radio" name="avatar" id="Lightningcat" />
             
-            <label class="tarjeta-de-catwar" for="Catoola"><p>Catoola</p><img src="./imagen/Catoola.png" alt="Catoola"></label>
+            <label class="tarjeta-de-catwar" for="Catoola"><p>Catoola</p>
+                <img src="./imagen/Catoola.png" alt="Catoola"></label>
             <input type="radio" name="avatar" id="Catoola" />
-        </div>
-
-
-        
+        </div>        
 
         <button id="seleccionar-avatar">Seleccionar</button>
     </section>
-    <section id="selecciona-elemento">
-        <h1 class="titulo"> CATWAR😸 🪨 ⚡ 🌊 </h1>
 
-        <h2>Elige tu elemento</h2>
-         <p>
-            "tu gato <span id="avatar-jugador"></span> tiene <span id="vidas-jugador">3</span> vidas"
-        </p>
-        <p>
-            "El gato enemigo <span id="Avatar-Enemigo"></span> tiene <span id="vidas-enemigo"> 3 </span> vidas"
-        </p> 
-        <p>
-            <button id="seleccionar-roca">Roca 🪨</button>
-            <button id="seleccionar-rayo">Rayo ⚡</button>
-            <button id="seleccionar-agua">Agua 🌊</button>
-        </p>
-        </section>
-        <section id="mensajes"> </section>
-        <section id="reiniciar">
-            <button id="boton-reiniciar">Reiniciar</button>
-        </section>
-        
-    
-</body>
+    <section id="selecciona-elemento">
+        <h1 class="titulo"> CATWAR😸</h1>
+        <h2 class="subtitulo">Elige tu elemento</h2>
+
+        <div>
+            <button id="seleccionar-roca" class="boton-de-ataque">Roca 🪨</button>
+            <button id="seleccionar-rayo" class="boton-de-ataque">Rayo ⚡</button>
+            <button id="seleccionar-agua" class="boton-de-ataque">Agua 🌊</button>
+        </div>
+
+            <div id="mensajes">
+                <p id="resultado">Mucha suerte</p>
+                <section id="reiniciar">
+                    <button id="boton-reiniciar">Reiniciar</button>
+                </section>
+            </div>           
+        <div>
+            <div>
+                <p id="vidas-jugador">3</p>
+                <p id="avatar-jugador"></p> 
+                <div id="ataque-del-jugardor"></div>
+            </div>
+            <div>
+                <p id="vidas-enemigo">3</p>
+                <p id="avatar-enemigo"></p> 
+                <div id="ataque-del-enemigo"></div>
+            </div>           
+
+        </div> 
+        </section>          
+    </body>
 </html>
