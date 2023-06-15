@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CATWAR</title>
-    <script src="./js/catWar.js"></script>
     <link rel="stylesheet" href="./styles.css">
 </head>
     <body> 
@@ -19,19 +18,15 @@
         <h2 class="subtitulo">Elige tu avatar</h2>
 
         <div class="tarjetas">
-
+            <input type="radio" name="avatar" id="Catrock" />
             <label class="tarjeta-de-catwar" for="Catrock"><p>Catrock</p>
                 <img src="./imagen/rock.png" alt="Catrock"> </label>
-            <input type="radio" name="avatar" id="Catrock" />
-            
-            <label class="tarjeta-de-catwar" for="Lightningcat"> <p>Lightningcat</p> 
-                <img src="./imagen/light.png" alt="Lightningcat"> </label>
-             
             <input type="radio" name="avatar" id="Lightningcat" />
-            
+            <label class="tarjeta-de-catwar" for="Lightningcat"> <p>Lightningcat</p> 
+                <img src="./imagen/light.png" alt="Lightningcat"> </label>             
+            <input type="radio" name="avatar" id="Catoola" />
             <label class="tarjeta-de-catwar" for="Catoola"><p>Catoola</p>
                 <img src="./imagen/Catoola.png" alt="Catoola"></label>
-            <input type="radio" name="avatar" id="Catoola" />
         </div>        
 
         <button id="seleccionar-avatar">Seleccionar</button>
@@ -41,7 +36,7 @@
         <h1 class="titulo"> CATWAR😸</h1>
         <h2 class="subtitulo">Elige tu elemento</h2>
 
-        <div>
+        <div class="elemento">
             <button id="seleccionar-roca" class="boton-de-ataque">Roca 🪨</button>
             <button id="seleccionar-rayo" class="boton-de-ataque">Rayo ⚡</button>
             <button id="seleccionar-agua" class="boton-de-ataque">Agua 🌊</button>
@@ -53,19 +48,20 @@
                     <button id="boton-reiniciar">Reiniciar</button>
                 </section>
             </div>           
-        <div>
-            <div>
+        <div class="ataques">
+            <div class="ataques-jugador">
                 <p id="vidas-jugador">3</p>
                 <p id="avatar-jugador"></p> 
                 <div id="ataque-del-jugardor"></div>
             </div>
-            <div>
+            <div class="ataques-enemigo">
                 <p id="vidas-enemigo">3</p>
                 <p id="avatar-enemigo"></p> 
                 <div id="ataque-del-enemigo"></div>
             </div>           
 
         </div> 
-        </section>          
+        </section> 
+        <script src="./js/catWar.js"></script>       
     </body>
 </html>

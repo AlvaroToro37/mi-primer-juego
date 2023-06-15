@@ -1,3 +1,27 @@
+const sectionReiniciar = document.getElementById("reiniciar")
+const sectionSeleccionarElemento = document.getElementById("selecciona-elemento")
+const botonAvatarJugador = document.getElementById('seleccionar-avatar')
+
+const sectionSeleccionarAvatar = document.getElementById("selecciona-avatar")
+const inputCatrock = document.getElementById('Catrock')
+const inputCatoola = document.getElementById('Catoola')
+const botonseleccionaravatar = document.getElementById('seleccionar-avatar')
+const spanavatarjugador = document.getElementById('avatar-jugador')
+const inputLightningcat = document.getElementById('Lightningcat')
+
+const spanAvatarEnemigo = document.getElementById('avatar-enemigo')
+
+const sectionMensajes = document.getElementById('resultado')
+const ataqueDelJugardor = document.getElementById('ataque-del-jugardor')
+const ataqueDelEnemigo = document.getElementById('ataque-del-enemigo')
+const botonRoca = document.getElementById('seleccionar-roca')
+const botonRayo = document.getElementById('seleccionar-rayo')
+const botonAgua = document.getElementById('seleccionar-agua')
+const botonReiniciar = document.getElementById('boton-reiniciar')
+
+const spanVidasEnemigo = document.getElementById('vidas-enemigo')
+const spanVidasJugador = document.getElementById('vidas-jugador')
+
 let ataqueJugador
 let ataqueEnemigo
 let vidasJugador = 3
@@ -5,41 +29,20 @@ let vidasEnemigo = 3
 
 function iniciarJuego() { 
 
-   let sectionReiniciar = document.getElementById("reiniciar")
+   
    sectionReiniciar.style.display = "none"
-
-   let sectionSeleccionarElemento = document.getElementById("selecciona-elemento")
    sectionSeleccionarElemento.style.display = "none"
-
-   let botonAvatarJugador = document.getElementById('seleccionar-avatar')
    botonAvatarJugador.addEventListener('click', seleccionarAvatarJugador)
-
-
-   let botonRoca = document.getElementById('seleccionar-roca')
    botonRoca.addEventListener('click', ataqueRoca)
-   let botonRayo = document.getElementById('seleccionar-rayo')
-   botonRayo.addEventListener('click', ataqueRayo)
-   let botonAgua = document.getElementById('seleccionar-agua')
+   botonRayo.addEventListener('click', ataqueRayo)  
    botonAgua.addEventListener('click', ataqueAgua)
 
-   let botonReiniciar = document.getElementById('boton-reiniciar')
    botonReiniciar.addEventListener('click', reiniciarJuego)
-
 }
-
 function seleccionarAvatarJugador() {
-   let sectionSeleccionarElemento = document.getElementById("selecciona-elemento")
    sectionSeleccionarElemento.style.display = "flex"
-   let sectionSeleccionarAvatar = document.getElementById("selecciona-avatar")
    sectionSeleccionarAvatar.style.display = "none"
-
-   let inputCatrock = document.getElementById('Catrock')
-   let inputLightningcat = document.getElementById('Lightningcat')
-   let inputCatoola = document.getElementById('Catoola')
-   let botonseleccionaravatar = document.getElementById('seleccionar-avatar')
-   let spanavatarjugador = document.getElementById('avatar-jugador')
-
-   if (inputCatrock.checked) {
+     if (inputCatrock.checked) {
       spanavatarjugador.innerHTML = 'Catrock'
    } else if (inputLightningcat.checked) {
       spanavatarjugador.innerHTML = 'Lightningcat'
@@ -54,8 +57,6 @@ function seleccionarAvatarJugador() {
 
 function seleccionarAvatarEnemigo() {
    let avatarAleatorio = aleatorio(1, 3)
-   let spanAvatarEnemigo = document.getElementById('avatar-enemigo')
-
    if (avatarAleatorio == 1) {
       spanAvatarEnemigo.innerHTML = 'Catrock'
    } else if (avatarAleatorio == 2) {
@@ -85,21 +86,14 @@ function ataqueAleatorioEnemigo(){
    if(ataqueAleatorio == 1){
       ataqueEnemigo = 'ROCA'
    }else if(ataqueAleatorio == 2){
-         ataqueEnemigo = 'RAYO'
+      ataqueEnemigo = 'RAYO'
       } else {
-         ataqueEnemigo = 'AGUA'
+      ataqueEnemigo = 'AGUA'
       } 
       combate()
    }
 
  function crearMensaje(resultado) {
-
-  
-   let sectionMensajes = document.getElementById('resultado')
-      let ataqueDelJugardor = document.getElementById('ataque-del-jugardor')
-      let ataqueDelEnemigo = document.getElementById('ataque-del-enemigo')
-   
-
       let nuevoAtaqueJugador = document.createElement('p')
       let nuevoAtaqueEnemigo = document.createElement('p') 
       
@@ -110,20 +104,13 @@ function ataqueAleatorioEnemigo(){
       ataqueDelEnemigo.appendChild(nuevoAtaqueEnemigo)
 
 }
-   
-
-
 function combate(){ 
-   let spanVidasJugador = document.getElementById('vidas-jugador')
-   let spanVidasEnemigo = document.getElementById('vidas-enemigo')
-
-   if(ataqueEnemigo == ataqueJugador) {
+    if(ataqueEnemigo == ataqueJugador) {
       crearMensaje("EMPATE")
   } else if(ataqueJugador == 'ROCA' && ataqueEnemigo == 'RAYO') {
       crearMensaje("GANASTE")
       vidasEnemigo--
       spanVidasEnemigo.innerHTML = vidasEnemigo
-   
   } else if(ataqueJugador == 'RAYO' && ataqueEnemigo == 'AGUA') {
       crearMensaje("GANASTE")
       vidasEnemigo--
@@ -137,44 +124,29 @@ function combate(){
       crearMensaje("PERDISTE")
       vidasJugador--
       spanVidasJugador.innerHTML = vidasJugador
-  }  
-  
+  }    
       revisarVidas()
 }
-
 function revisarVidas(){
    if(vidasEnemigo == 0){
       crearMensajeFinal("FELICIDADES, Ganaste")
    } else if(vidasJugador == 0){
       crearMensajeFinal("LO SIENTO, Perdiste")
-   }
-   
+   }   
 }
-
-
 function crearMensajeFinal(resultadoFinal) {
 
-   let sectionReiniciar = document.getElementById("reiniciar")
-   sectionReiniciar.style.display = "block"
-
-   let sectionMensajes = document.getElementById('resultado')
-    
+   sectionReiniciar.style.display = "block"    
    sectionMensajes.innerHTML = resultadoFinal
-
-
-   let botonRoca = document.getElementById('seleccionar-roca')
-   botonRoca.disabled = true
-   let botonRayo = document.getElementById('seleccionar-rayo')
-   botonRayo.disabled = true
-   let botonAgua = document.getElementById('seleccionar-agua')
+   
+   botonRoca.disabled = true   
+   botonRayo.disabled = true  
    botonAgua.disabled = true
 
 }
-
 function reiniciarJuego(){
    location.reload() 
 }
-
 function aleatorio(min, max) {
    return Math.floor(Math.random() * (max - min + 1) + min)
 }
