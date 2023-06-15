@@ -71,6 +71,11 @@ function iniciarJuego() {
    
    sectionReiniciar.style.display = "none"
    sectionSeleccionarElemento.style.display = "none"
+
+   catswarrior.forEach((catswarrior) => {
+         
+   })
+
    botonAvatarJugador.addEventListener('click', seleccionarAvatarJugador)
    botonRoca.addEventListener('click', ataqueRoca)
    botonRayo.addEventListener('click', ataqueRayo)  
