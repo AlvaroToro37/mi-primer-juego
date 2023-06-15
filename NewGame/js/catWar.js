@@ -22,10 +22,49 @@ const botonReiniciar = document.getElementById('boton-reiniciar')
 const spanVidasEnemigo = document.getElementById('vidas-enemigo')
 const spanVidasJugador = document.getElementById('vidas-jugador')
 
+let catswarrior = []
 let ataqueJugador
 let ataqueEnemigo
 let vidasJugador = 3
 let vidasEnemigo = 3
+
+class Catwar {
+   constructor(nombre, foto, vida) {
+      this.nombre = nombre
+      this.foto = foto
+      this.vida = vida 
+      this.ataques = []
+   }
+}
+
+let catrock = new Catwar('Catrock', './imagen/rock.png', 5)
+let lightningcat = new Catwar('Lightningcat', './imagen/lightningcat.png', 5)
+let catoola = new Catwar('Catoola', './imagen/Catoola.png', 5)
+
+catrock.ataques.push(
+   {nombre: '🪨', id: 'seleccionar-roca'},
+   {nombre: '🪨', id: 'seleccionar-roca'},
+   {nombre: '🪨', id: 'seleccionar-roca'},
+   {nombre: '⚡',  id: 'seleccionar-rayo'},
+   {nombre: '🌊', id: 'seleccionar-agua'},
+)
+lightningcat.ataques.push(
+   {nombre: '⚡',  id: 'seleccionar-rayo'},
+   {nombre: '⚡',  id: 'seleccionar-rayo'},
+   {nombre: '⚡',  id: 'seleccionar-rayo'},
+   {nombre: '🪨', id: 'seleccionar-roca'},   
+   {nombre: '🌊', id: 'seleccionar-agua'},
+)
+catoola.ataques.push(
+   {nombre: '🌊', id: 'seleccionar-agua'},
+   {nombre: '🌊', id: 'seleccionar-agua'},
+   {nombre: '🌊', id: 'seleccionar-agua'},
+   {nombre: '🪨', id: 'seleccionar-roca'},
+   {nombre: '⚡',  id: 'seleccionar-rayo'},   
+)
+
+catswarrior.push(catrock,lightningcat,catoola)
+
 
 function iniciarJuego() { 
 
