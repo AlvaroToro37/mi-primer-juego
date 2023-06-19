@@ -3,12 +3,8 @@ const sectionSeleccionarElemento = document.getElementById("selecciona-elemento"
 const botonAvatarJugador = document.getElementById('seleccionar-avatar')
 
 const sectionSeleccionarAvatar = document.getElementById("selecciona-avatar")
-const inputCatrock = document.getElementById('Catrock')
-const inputCatoola = document.getElementById('Catoola')
 const botonseleccionaravatar = document.getElementById('seleccionar-avatar')
 const spanavatarjugador = document.getElementById('avatar-jugador')
-const inputLightningcat = document.getElementById('Lightningcat')
-
 const spanAvatarEnemigo = document.getElementById('avatar-enemigo')
 
 const sectionMensajes = document.getElementById('resultado')
@@ -21,10 +17,16 @@ const botonReiniciar = document.getElementById('boton-reiniciar')
 
 const spanVidasEnemigo = document.getElementById('vidas-enemigo')
 const spanVidasJugador = document.getElementById('vidas-jugador')
+const contenedorTarjetas = document.getElementById('contenedorTarjetas')
+
 
 let catswarrior = []
 let ataqueJugador
 let ataqueEnemigo
+let opcionesDeCatwar
+let inputCatrock 
+let inputCatoola
+let inputLightningcat
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -73,13 +75,23 @@ function iniciarJuego() {
    sectionSeleccionarElemento.style.display = "none"
 
    catswarrior.forEach((catswarrior) => {
-         
+         opcionesDeCatwar = `
+         <input type="radio" name="avatar" id=${catswarrior.nombre} />
+            <label class="tarjeta-de-catwar" for=${catswarrior.nombre} ><p>${catswarrior.nombre} </p>
+                <img src=${catswarrior.foto} alt=${catswarrior.nombre} > </label>`
+
+   contenedorTarjetas.innerHTML += opcionesDeCatwar 
+
+      inputCatrock = document.getElementById('Catrock')
+      inputCatoola = document.getElementById('Catoola')
+      inputLightningcat = document.getElementById('Lightningcat')
    })
 
    botonAvatarJugador.addEventListener('click', seleccionarAvatarJugador)
    botonRoca.addEventListener('click', ataqueRoca)
    botonRayo.addEventListener('click', ataqueRayo)  
    botonAgua.addEventListener('click', ataqueAgua)
+
 
    botonReiniciar.addEventListener('click', reiniciarJuego)
 }
