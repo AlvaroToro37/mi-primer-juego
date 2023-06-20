@@ -4,7 +4,7 @@ const botonAvatarJugador = document.getElementById('seleccionar-avatar')
 
 const sectionSeleccionarAvatar = document.getElementById("selecciona-avatar")
 const botonseleccionaravatar = document.getElementById('seleccionar-avatar')
-const spanavatarjugador = document.getElementById('avatar-jugador')
+const spanAvatarjugador = document.getElementById('avatar-jugador')
 const spanAvatarEnemigo = document.getElementById('avatar-enemigo')
 
 const sectionMensajes = document.getElementById('resultado')
@@ -27,6 +27,7 @@ let opcionesDeCatwar
 let inputCatrock 
 let inputCatoola
 let inputLightningcat
+let avatarJugador 
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -40,7 +41,9 @@ class Catwar {
 }
 
 let catrock = new Catwar('Catrock', './imagen/rock.png', 5)
+
 let lightningcat = new Catwar('Lightningcat', './imagen/lightningcat.png', 5)
+
 let catoola = new Catwar('Catoola', './imagen/Catoola.png', 5)
 
 catrock.ataques.push(
@@ -77,49 +80,68 @@ function iniciarJuego() {
    catswarrior.forEach((catswarrior) => {
          opcionesDeCatwar = `
          <input type="radio" name="avatar" id=${catswarrior.nombre} />
-            <label class="tarjeta-de-catwar" for=${catswarrior.nombre} ><p>${catswarrior.nombre} </p>
-                <img src=${catswarrior.foto} alt=${catswarrior.nombre} > </label>`
+            <label class="tarjeta-de-catwar" for=${catswarrior.nombre} >
+            <p>${catswarrior.nombre} </p>
+                <img src=${catswarrior.foto} alt=${catswarrior.nombre} > 
+         </label>`
 
    contenedorTarjetas.innerHTML += opcionesDeCatwar 
 
       inputCatrock = document.getElementById('Catrock')
-      inputCatoola = document.getElementById('Catoola')
       inputLightningcat = document.getElementById('Lightningcat')
+      inputCatoola = document.getElementById('Catoola')
+      
    })
 
    botonAvatarJugador.addEventListener('click', seleccionarAvatarJugador)
+
    botonRoca.addEventListener('click', ataqueRoca)
+
    botonRayo.addEventListener('click', ataqueRayo)  
+
    botonAgua.addEventListener('click', ataqueAgua)
 
 
    botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 function seleccionarAvatarJugador() {
-   sectionSeleccionarElemento.style.display = "flex"
+   
    sectionSeleccionarAvatar.style.display = "none"
-     if (inputCatrock.checked) {
-      spanavatarjugador.innerHTML = 'Catrock'
+
+   sectionSeleccionarElemento.style.display = "flex"
+          
+   if (inputCatrock.checked) {
+      spanAvatarjugador.innerHTML = inputCatrock.id
+      avatarJugador = inputCatrock.id
    } else if (inputLightningcat.checked) {
-      spanavatarjugador.innerHTML = 'Lightningcat'
+      spanAvatarjugador.innerHTML = inputLightningcat.id
+      avatarJugador = inputLightningcat.id
    } else if (inputCatoola.checked) {
-      spanavatarjugador.innerHTML = 'Catoola'
+      spanAvatarjugador.innerHTML = inputCatoola.id
+      avatarJugador = inputCatoola.id
    } else {
-      alert('Selecciona avartar')
+      alert('Selecciona un avartar')
    }
+   extraerAtaques(avatarJugador)
 
    seleccionarAvatarEnemigo()
 }
 
-function seleccionarAvatarEnemigo() {
-   let avatarAleatorio = aleatorio(1, 3)
-   if (avatarAleatorio == 1) {
-      spanAvatarEnemigo.innerHTML = 'Catrock'
-   } else if (avatarAleatorio == 2) {
-      spanAvatarEnemigo.innerHTML = 'Lightningcat'
-   } else {
-      spanAvatarEnemigo.innerHTML = 'Catoola'
+function extraerAtaques(avatarJugador) {
+   let ataques 
+   for (let i = 0; i < catswarrior.length; i++) {
+      if (avatarJugador === catswarrior[i].nombre) {
+         ataques = catswarrior[i].ataques
+      }
+      
+      
    }
+}
+
+function seleccionarAvatarEnemigo() {
+   let avatarAleatorio = aleatorio(0, catswarrior.length -1)
+   
+   spanAvatarEnemigo.innerHTML = catswarrior[avatarAleatorio].nombre
 }
 
 function ataqueRoca() {
