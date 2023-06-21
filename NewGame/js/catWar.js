@@ -1,33 +1,37 @@
 const sectionReiniciar = document.getElementById("reiniciar")
 const sectionSeleccionarElemento = document.getElementById("selecciona-elemento")
 const botonAvatarJugador = document.getElementById('seleccionar-avatar')
+const botonReiniciar = document.getElementById('boton-reiniciar')
+
 
 const sectionSeleccionarAvatar = document.getElementById("selecciona-avatar")
-const botonseleccionaravatar = document.getElementById('seleccionar-avatar')
 const spanAvatarjugador = document.getElementById('avatar-jugador')
+
 const spanAvatarEnemigo = document.getElementById('avatar-enemigo')
+
+const spanVidasEnemigo = document.getElementById('vidas-enemigo')
+const spanVidasJugador = document.getElementById('vidas-jugador')
 
 const sectionMensajes = document.getElementById('resultado')
 const ataqueDelJugardor = document.getElementById('ataque-del-jugardor')
 const ataqueDelEnemigo = document.getElementById('ataque-del-enemigo')
-const botonRoca = document.getElementById('seleccionar-roca')
-const botonRayo = document.getElementById('seleccionar-rayo')
-const botonAgua = document.getElementById('seleccionar-agua')
-const botonReiniciar = document.getElementById('boton-reiniciar')
-
-const spanVidasEnemigo = document.getElementById('vidas-enemigo')
-const spanVidasJugador = document.getElementById('vidas-jugador')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas')
-
+const contenedorAtaques = document.getElementById('contenedorAtaques')
 
 let catswarrior = []
-let ataqueJugador
-let ataqueEnemigo
+let ataqueJugador = []
+let ataqueEnemigo = []
 let opcionesDeCatwar
 let inputCatrock 
 let inputCatoola
 let inputLightningcat
 let avatarJugador 
+let ataquesCatwar 
+let ataquesCatwarEnemigo
+let botonRoca 
+let botonRayo 
+let botonAgua 
+let botones = []
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -53,13 +57,16 @@ catrock.ataques.push(
    {nombre: '⚡',  id: 'seleccionar-rayo'},
    {nombre: '🌊', id: 'seleccionar-agua'},
 )
+
 lightningcat.ataques.push(
    {nombre: '⚡',  id: 'seleccionar-rayo'},
    {nombre: '⚡',  id: 'seleccionar-rayo'},
    {nombre: '⚡',  id: 'seleccionar-rayo'},
    {nombre: '🪨', id: 'seleccionar-roca'},   
    {nombre: '🌊', id: 'seleccionar-agua'},
+
 )
+
 catoola.ataques.push(
    {nombre: '🌊', id: 'seleccionar-agua'},
    {nombre: '🌊', id: 'seleccionar-agua'},
@@ -70,11 +77,8 @@ catoola.ataques.push(
 
 catswarrior.push(catrock,lightningcat,catoola)
 
-
 function iniciarJuego() { 
-
    
-   sectionReiniciar.style.display = "none"
    sectionSeleccionarElemento.style.display = "none"
 
    catswarrior.forEach((catswarrior) => {
@@ -83,8 +87,8 @@ function iniciarJuego() {
             <label class="tarjeta-de-catwar" for=${catswarrior.nombre} >
             <p>${catswarrior.nombre} </p>
                 <img src=${catswarrior.foto} alt=${catswarrior.nombre} > 
-         </label>`
-
+         </label>
+         `
    contenedorTarjetas.innerHTML += opcionesDeCatwar 
 
       inputCatrock = document.getElementById('Catrock')
@@ -95,21 +99,22 @@ function iniciarJuego() {
 
    botonAvatarJugador.addEventListener('click', seleccionarAvatarJugador)
 
-   botonRoca.addEventListener('click', ataqueRoca)
-
-   botonRayo.addEventListener('click', ataqueRayo)  
-
-   botonAgua.addEventListener('click', ataqueAgua)
+  
 
 
-   botonReiniciar.addEventListener('click', reiniciarJuego)
+
+      botonReiniciar.addEventListener('click', reiniciarJuego)
 }
+
 function seleccionarAvatarJugador() {
    
    sectionSeleccionarAvatar.style.display = "none"
 
+
    sectionSeleccionarElemento.style.display = "flex"
           
+   
+   
    if (inputCatrock.checked) {
       spanAvatarjugador.innerHTML = inputCatrock.id
       avatarJugador = inputCatrock.id
@@ -122,8 +127,8 @@ function seleccionarAvatarJugador() {
    } else {
       alert('Selecciona un avartar')
    }
-   extraerAtaques(avatarJugador)
 
+   extraerAtaques(avatarJugador)
    seleccionarAvatarEnemigo()
 }
 
@@ -133,56 +138,75 @@ function extraerAtaques(avatarJugador) {
       if (avatarJugador === catswarrior[i].nombre) {
          ataques = catswarrior[i].ataques
       }
-      
-      
+
    }
+   mostrarAtaques(ataques)
+}  
+
+   function mostrarAtaques(ataques) {
+      ataques.forEach((ataque) => {
+         ataquesCatwar = `
+         <button id=${ataque.id} class="boton-de-ataque BAtaque">${ataque.nombre}</button>
+         `
+         contenedorAtaques.innerHTML += ataquesCatwar
+   })
+
+      botonRoca = document.getElementById('boton-roca')
+      botonRayo = document.getElementById('boton-rayo')
+      botonAgua = document.getElementById('boton-agua')
+      botones = document.querySelectorAll('.BAtaque')
+}
+
+function secuenciaAtaque() {
+   botones.forEach((boton) => {
+       boton.addEventListener('click', (e) => {
+           if (e.target.textContent === '🪨') {
+               ataqueJugador.push('ROCA')
+               console.log(ataqueJugador)
+               boton.style.background = '#112f58'   
+           } else if (e.target.textContent === '⚡') {
+               ataqueJugador.push('RAYO')
+               console.log(ataqueJugador)
+               boton.style.background = '#112f58'
+           } else {
+               ataqueJugador.push('AGUA')
+               console.log(ataqueJugador)
+               boton.style.background = '#112f58'
+           }
+           ataqueAleatorioEnemigo()
+       })
+   })
+   
+   
 }
 
 function seleccionarAvatarEnemigo() {
    let avatarAleatorio = aleatorio(0, catswarrior.length -1)
    
    spanAvatarEnemigo.innerHTML = catswarrior[avatarAleatorio].nombre
+   ataquesCatwarEnemigo = catswarrior[avatarAleatorio].ataque
+   secuenciaAtaque()
 }
 
-function ataqueRoca() {
-   ataqueJugador = 'ROCA'
-   ataqueAleatorioEnemigo()
-}
-function ataqueRayo() {
-   ataqueJugador = 'RAYO'
-   ataqueAleatorioEnemigo()
-}
-function ataqueAgua() {
-   ataqueJugador = 'AGUA'
-   ataqueAleatorioEnemigo()
-}
 
-function ataqueAleatorioEnemigo(){
+function ataqueAleatorioEnemigo() {
+   let ataqueAleatorio = aleatorio(0,ataquesCatwarEnemigo.length -1)
    
-   let ataqueAleatorio = aleatorio(1,3)
-   
-   if(ataqueAleatorio == 1){
-      ataqueEnemigo = 'ROCA'
-   }else if(ataqueAleatorio == 2){
-      ataqueEnemigo = 'RAYO'
-      } else {
-      ataqueEnemigo = 'AGUA'
-      } 
-      combate()
+   if (ataqueAleatorio == 0 || ataqueAleatorio ==1) {
+       ataqueEnemigo.push('ROCA')
+   } else if (ataqueAleatorio == 3 || ataqueAleatorio == 4) {
+       ataqueEnemigo.push('RAYO')
+   } else {
+       ataqueEnemigo.push('AGUA')
    }
-
- function crearMensaje(resultado) {
-      let nuevoAtaqueJugador = document.createElement('p')
-      let nuevoAtaqueEnemigo = document.createElement('p') 
-      
-      sectionMensajes.innerHTML = resultado
-      nuevoAtaqueJugador.innerHTML = ataqueJugador
-      nuevoAtaqueEnemigo.innerHTML = ataqueEnemigo
-      ataqueDelJugardor.appendChild(nuevoAtaqueJugador)
-      ataqueDelEnemigo.appendChild(nuevoAtaqueEnemigo)
-
+   console.log(ataqueEnemigo)
+   combate()
 }
-function combate(){ 
+
+
+ function combate(){ 
+
+
     if(ataqueEnemigo == ataqueJugador) {
       crearMensaje("EMPATE")
   } else if(ataqueJugador == 'ROCA' && ataqueEnemigo == 'RAYO') {
@@ -192,8 +216,7 @@ function combate(){
   } else if(ataqueJugador == 'RAYO' && ataqueEnemigo == 'AGUA') {
       crearMensaje("GANASTE")
       vidasEnemigo--
-      spanVidasEnemigo.innerHTML = vidasEnemigo
-   
+      spanVidasEnemigo.innerHTML = vidasEnemigo   
   } else if(ataqueJugador == 'AGUA' && ataqueEnemigo == 'ROCA') {
       crearMensaje("GANASTE")
       vidasEnemigo--
@@ -202,9 +225,11 @@ function combate(){
       crearMensaje("PERDISTE")
       vidasJugador--
       spanVidasJugador.innerHTML = vidasJugador
-  }    
+  } 
+
       revisarVidas()
 }
+
 function revisarVidas(){
    if(vidasEnemigo == 0){
       crearMensajeFinal("FELICIDADES, Ganaste")
@@ -212,21 +237,44 @@ function revisarVidas(){
       crearMensajeFinal("LO SIENTO, Perdiste")
    }   
 }
+
+function crearMensaje(resultado) {
+
+
+   let nuevoAtaqueJugador = document.createElement('p')
+   let nuevoAtaqueEnemigo = document.createElement('p') 
+   
+   sectionMensajes.innerHTML = resultado
+   nuevoAtaqueJugador.innerHTML = ataqueJugador
+   nuevoAtaqueEnemigo.innerHTML = ataqueEnemigo
+
+   ataqueDelJugardor.appendChild(nuevoAtaqueJugador)
+   ataqueDelEnemigo.appendChild(nuevoAtaqueEnemigo)
+}
+
 function crearMensajeFinal(resultadoFinal) {
 
-   sectionReiniciar.style.display = "block"    
-   sectionMensajes.innerHTML = resultadoFinal
+
+      sectionMensajes.innerHTML = resultadoFinal
    
-   botonRoca.disabled = true   
+
+   botonRoca.disabled = true  
+
    botonRayo.disabled = true  
+   
    botonAgua.disabled = true
 
+
+   sectionReiniciar.style.display = "block"  
 }
+
 function reiniciarJuego(){
    location.reload() 
 }
+
 function aleatorio(min, max) {
    return Math.floor(Math.random() * (max - min + 1) + min)
 }
+
 window.addEventListener('load', iniciarJuego)
 
