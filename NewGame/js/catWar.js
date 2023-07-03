@@ -18,6 +18,9 @@ const ataqueDelEnemigo = document.getElementById('ataque-del-enemigo')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas')
 const contenedorAtaques = document.getElementById('contenedorAtaques')
 
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa') 
+
 let catswarrior = []
 let ataqueJugador = []
 let ataqueEnemigo = []
@@ -27,17 +30,19 @@ let inputCatoola
 let inputLightningcat
 let avatarJugador 
 let ataquesCatwar 
-let ataqueCatwarEnemigo 
+let ataquesCatwarEnemigo 
 let botonRoca 
 let botonRayo 
 let botonAgua 
 let botones = []
-let indexataqueJugador
+let indexAtaqueJugador
 let indexAtaqueEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0 
 let vidasJugador = 3
 let vidasEnemigo = 3
+let lienzo = mapa.getContext("2d")
+let intervalo
 
 class Catwar {
    constructor(nombre, foto, vida) {
@@ -45,6 +50,16 @@ class Catwar {
       this.foto = foto
       this.vida = vida 
       this.ataques = []
+      this.x = 20
+      this.y = 30
+      this.ancho = 80
+      this.alto = 80
+      this.mapaFoto = new Image()
+      this.mapaFoto.src = foto
+      this.velocidadX = 0
+      this.velocidadY = 0
+
+
    }
 }
 
@@ -85,6 +100,7 @@ catswarrior.push(catrock,lightningcat,catoola)
 function iniciarJuego() { 
    
    sectionSeleccionarAtaque.style.display = "none"
+   sectionVerMapa.style.display = 'none'
 
    catswarrior.forEach((catswar) => {
          opcionesDeCatwar = `
@@ -99,14 +115,9 @@ function iniciarJuego() {
       inputCatrock = document.getElementById('Catrock')
       inputLightningcat = document.getElementById('Lightningcat')
       inputCatoola = document.getElementById('Catoola')
-      
    })
 
    botonAvatarJugador.addEventListener('click', seleccionarAvatarJugador)
-
-  
-
-
 
       botonReiniciar.addEventListener('click', reiniciarJuego)
 }
@@ -115,9 +126,10 @@ function seleccionarAvatarJugador() {
    
    sectionSeleccionarAvatar.style.display = "none"
 
-
-   sectionSeleccionarAtaque.style.display = "flex"
-          
+   // sectionSeleccionarAtaque.style.display = "flex"
+   sectionVerMapa.style.display = "flex"   
+   iniciarMapa()
+             
    
    
    if (inputCatrock.checked) {
@@ -164,7 +176,7 @@ function extraerAtaques(avatarJugador) {
 
 function secuenciaAtaque() {
    botones.forEach((boton) => {
-       boton.addEventListener('click', (e) => {
+       boton.addEventListener('click', (e) => {         
            if (e.target.textContent === '🪨') {
                ataqueJugador.push('ROCA')
                console.log(ataqueJugador)
@@ -192,14 +204,14 @@ function seleccionarAvatarEnemigo() {
    let avatarAleatorio = aleatorio(0, catswarrior.length -1)
    
    spanAvatarEnemigo.innerHTML = catswarrior[avatarAleatorio].nombre
-   ataqueCatwarEnemigo = catswarrior[avatarAleatorio].ataque
+   ataquesCatwarEnemigo = catswarrior[avatarAleatorio].ataques
   
    secuenciaAtaque()
 }
 
 
 function ataqueAleatorioEnemigo() {
-   let ataqueAleatorio = aleatorio(0, ataqueCatwarEnemigo.length -1)
+   let ataqueAleatorio = aleatorio(0, ataquesCatwarEnemigo.length -1)
    
       if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
       ataqueEnemigo.push('ROCA') 
@@ -208,8 +220,8 @@ function ataqueAleatorioEnemigo() {
    } else {
       ataqueEnemigo.push('AGUA')
    }
-   console.log('ataqueCatwarEnemigo')
-   iniciarPelea()
+      
+   
 }
 
 function iniciarPelea() {
@@ -219,7 +231,7 @@ function iniciarPelea() {
 }
 
 function indexAmbosOponentes(jugador, enemigo) {
-   indexataqueJugador = ataqueJugador[jugador]
+   indexAtaqueJugador = ataqueJugador[jugador]
    indexAtaqueEnemigo = ataqueEnemigo[enemigo]
 }
 
@@ -296,6 +308,68 @@ function reiniciarJuego(){
 
 function aleatorio(min, max) {
    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function pintarPersonaje(){
+   catrock.x = catrock.x + catrock.velocidadX
+   catoola.y = catrock.y + catrock.velocidadY
+   lienzo.clearRect(0, 0, mapa.width, mapa.height)
+   lienzo.drawImage(
+      catrock.mapaFoto,
+      catrock.x,
+      catrock.y,
+      catrock.ancho,
+      catrock.alto
+   )
+}
+
+function moverDerecha() {
+   catrock.velocidadX = 5
+}
+
+function moverIzquierda() {
+   catrock.velocidadX = -5
+}
+
+function moverAbajo() {
+   catrock.velocidadY = 5
+}
+
+function moverArriba() {
+   catrock.velocidadY = -5
+}
+
+function detenerMovimiento() {
+   catrock.velocidadX = 0
+   catrock.velocidadY = 0
+
+}
+
+function sePresionoUnaTecla(event) {
+   switch (event.key) {
+       case 'ArrowUp':
+           moverArriba()
+           break
+       case 'ArrowDown':
+           moverAbajo()
+           break
+       case 'ArrowLeft':
+           moverIzquierda()
+           break
+       case 'ArrowRight':
+           moverDerecha()
+           break
+       default:
+           break
+   }
+}
+
+function iniciarMapa() {
+   intervalo = setInterval(pintarPersonaje, 50)
+   
+   window.addEventListener('keydown', sePresionoUnaTecla)
+
+   window.addEventListener('keyup', detenerMovimiento)
 }
 
 window.addEventListener('load', iniciarJuego)
