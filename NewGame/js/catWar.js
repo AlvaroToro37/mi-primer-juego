@@ -29,6 +29,7 @@ let inputCatrock
 let inputCatoola
 let inputLightningcat
 let avatarJugador 
+let avatarJugadorObjeto
 let ataquesCatwar 
 let ataquesCatwarEnemigo 
 let botonRoca 
@@ -43,6 +44,9 @@ let vidasJugador = 3
 let vidasEnemigo = 3
 let lienzo = mapa.getContext("2d")
 let intervalo
+let mapaBackground = new Image()
+mapaBackground.src = './imagen/catmap.png'
+
 
 class Catwar {
    constructor(nombre, foto, vida) {
@@ -127,9 +131,7 @@ function seleccionarAvatarJugador() {
    sectionSeleccionarAvatar.style.display = "none"
 
    // sectionSeleccionarAtaque.style.display = "flex"
-   sectionVerMapa.style.display = "flex"   
-   iniciarMapa()
-             
+               
    
    
    if (inputCatrock.checked) {
@@ -146,6 +148,8 @@ function seleccionarAvatarJugador() {
    }
 
    extraerAtaques(avatarJugador)
+   sectionVerMapa.style.display = "flex"   
+   iniciarMapa()
    seleccionarAvatarEnemigo()
 }
 
@@ -310,38 +314,45 @@ function aleatorio(min, max) {
    return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function pintarPersonaje(){
-   catrock.x = catrock.x + catrock.velocidadX
-   catrock.y = catrock.y + catrock.velocidadY
+function pintarCanvas(){
+   avatarJugadorObjeto.x = avatarJugadorObjeto.x + avatarJugadorObjeto.velocidadX
+   avatarJugadorObjeto.y = avatarJugadorObjeto.y + avatarJugadorObjeto.velocidadY
    lienzo.clearRect(0, 0, mapa.width, mapa.height)
    lienzo.drawImage(
-      catrock.mapaFoto,
-      catrock.x,
-      catrock.y,
-      catrock.ancho,
-      catrock.alto
+      mapaBackground,
+      0,
+      0,
+      mapa.width,
+      mapa.height
+   )
+   lienzo.drawImage(
+      avatarJugadorObjeto.mapaFoto,
+      avatarJugadorObjeto.x,
+      avatarJugadorObjeto.y,
+      avatarJugadorObjeto.ancho,
+      avatarJugadorObjeto.alto
    )
 }
 
 function moverDerecha() {
-   catrock.velocidadX = 5
+   avatarJugadorObjeto.velocidadX = 5
 }
 
 function moverIzquierda() {
-   catrock.velocidadX = -5
+   avatarJugadorObjeto.velocidadX = -5
 }
 
 function moverAbajo() {
-   catrock.velocidadY = 5
+   avatarJugadorObjeto.velocidadY = 5
 }
 
 function moverArriba() {
-   catrock.velocidadY = -5
+   avatarJugadorObjeto.velocidadY = -5
 }
 
 function detenerMovimiento() {
-   catrock.velocidadX = 0
-   catrock.velocidadY = 0
+   avatarJugadorObjeto.velocidadX = 0
+   avatarJugadorObjeto.velocidadY = 0
 
 }
 
@@ -365,12 +376,24 @@ function sePresionoUnaTecla(event) {
 }
 
 function iniciarMapa() {
-   intervalo = setInterval(pintarPersonaje, 50)
+   mapa.width = 700
+   mapa.height = 600
+   avatarJugadorObjeto = obtenerObjetoMascota(avatarJugador)
+   intervalo = setInterval(pintarCanvas, 50)
    
    window.addEventListener('keydown', sePresionoUnaTecla)
 
    window.addEventListener('keyup', detenerMovimiento)
 }
+
+function obtenerObjetoMascota() {
+   for (let i = 0; i < catswarrior.length; i++) {
+      if (avatarJugador === catswarrior[i].nombre) {
+         return catswarrior[i]
+      }
+   }     
+}
+
 
 window.addEventListener('load', iniciarJuego)
 
