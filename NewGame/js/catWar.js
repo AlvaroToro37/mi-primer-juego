@@ -312,7 +312,7 @@ function aleatorio(min, max) {
 
 function pintarPersonaje(){
    catrock.x = catrock.x + catrock.velocidadX
-   catoola.y = catrock.y + catrock.velocidadY
+   catrock.y = catrock.y + catrock.velocidadY
    lienzo.clearRect(0, 0, mapa.width, mapa.height)
    lienzo.drawImage(
       catrock.mapaFoto,

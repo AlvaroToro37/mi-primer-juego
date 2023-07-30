@@ -43,6 +43,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    color:antiquewhite
 }
 .tarjeta-de-catwar img{
     width: 114px;
@@ -68,7 +69,6 @@ input:checked + label{
 }
 
 #selecciona-elemento{
-display: flex;
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -111,6 +111,12 @@ align-items: center;
     border-radius: 15px;
 
 }
+
+#vidas-jugador, #vidas-enemigo{
+    font-size: 32px;
+    margin: 0;
+}
+
 .ataques-jugador, .ataques-enemigo{
     display: flex;
     flex-direction: column;
@@ -124,7 +130,7 @@ align-items: center;
 }
 
 #mapa{
-    border: 2px solid white;
+    border: 4px solid white;
 }
 
 @media (max-width: 360px) {
